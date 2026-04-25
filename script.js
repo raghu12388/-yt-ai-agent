@@ -1,31 +1,12 @@
-import axios from "axios";
+ import { getStyle } from "./trend.js";
 
-export async function generateContent() {
-  const res = await axios.post(
-    "https://api.openai.com/v1/chat/completions",
-    {
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "user",
-          content: `
-Create a viral Hindi YouTube Shorts horror script.
+const style = getStyle();
 
-Return JSON:
-{
-"title": "",
-"script": "",
-"tags": ["horror","shorts","mystery"]
-}`
-        }
-      ]
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
-      }
-    }
-  );
+content: `
+Create a viral Hindi horror story based on: ${style}
 
-  return JSON.parse(res.data.choices[0].message.content);
-}
+- Hook in first 2 sec
+- Real feel
+- Twist ending
+- Very scary tone
+`
