@@ -1,8 +1,6 @@
-import gtts from "gtts";
+ import fs from "fs";
 
-export function createVoice(script) {
-  return new Promise((resolve) => {
-    const speech = new gtts(script, "hi");
-    speech.save("voice.mp3", () => resolve());
-  });
+export async function createVoice(script) {
+  // Dummy voice (replace with real TTS later)
+  fs.writeFileSync("voice.mp3", script);
 }
