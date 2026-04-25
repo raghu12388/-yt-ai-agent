@@ -1,4 +1,9 @@
- async function runAgentBatch() {
+ import { generateContent } from "./script.js";
+import { createVoice } from "./voice.js";
+import { createVideo } from "./video.js";
+import { uploadVideo } from "./upload.js";
+
+async function runAgentBatch() {
   console.log("🚀 Starting AI Content Machine...");
 
   for (let i = 1; i <= 10; i++) {
@@ -17,21 +22,24 @@
       await uploadVideo(content);
       console.log("✅ Uploaded");
 
-      await new Promise(r => setTimeout(r, 60000)); // 1 min delay
+      // Delay to avoid API limits
+      await new Promise(r => setTimeout(r, 60000));
 
     } catch (err) {
       console.log("❌ Error:", err.message);
     }
   }
+
+  console.log("🔥 Batch Completed");
 }
 
-// RUN FIRST TIME
+// Run immediately
 runAgentBatch();
 
-// KEEP SERVER ALIVE (VERY IMPORTANT)
+// Keep app alive
 setInterval(() => {
   console.log("⏳ Keeping server alive...");
 }, 1000 * 60 * 5);
 
-// RUN EVERY DAY
+// Run daily
 setInterval(runAgentBatch, 1000 * 60 * 60 * 24);
